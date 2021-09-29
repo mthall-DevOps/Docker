@@ -1,0 +1,20 @@
+#A docker-compose.yml looks like this:
+version: '3.0'
+services:
+  web:
+    build: .
+    ports:
+    - "5000:5000"
+    volumes:
+    - .:/code    ## Bind Volumes
+    - logvolume01:/var/log    ## Named Volumes (we will generally use this concept when we have Filsystem like AWS EFS/EBS - Elastic File System in place)
+    network: flipkart
+    links:
+    - redis
+  redis:
+    image: redis
+    network: flipkart
+
+volumes:
+  logvolume01: {}
+

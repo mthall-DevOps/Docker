@@ -1,0 +1,13 @@
+#Link tomcat and Apache
+#Commands to use
+
+#Build the Images forom Dockerfile
+docker build -t tomcat:v1 /root/tomcat/Dockerfile
+docker build -t apache:v1 /root/apache/Dockerfile
+
+#Running tomcat container privately not exposing
+docker run -itd --name tomcat tomcat:v1
+
+#Running apache container and exposing on 80 port linking the tomcat container.
+docker run -itd -p 80:80 --link tomcat --name apache apache:v1
+
